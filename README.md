@@ -1,3 +1,5 @@
+
+
 # Olist Last Mile Analysis
 
 Analysis of last mile delivery performance using the Brazilian e-commerce public dataset (Olist), covering order fulfillment, delivery delays, freight pricing, and customer satisfaction.
@@ -28,11 +30,28 @@ Which phase of the order lifecycle concentrates more delay: between approval and
 
 | Layer | Tool |
 |---|---|
-| Exploration & cleaning | Python (pandas, numpy) · Jupyter Notebook |
-| Data warehouse | Google BigQuery |
-| Transformation & modeling | dbt |
-| Visualization | Power BI |
+| Notebooks & exploration | Databricks Notebooks |
+| Bronze layer | Databricks — raw data, never modified |
+| Silver layer | Databricks — cleaned and standardized data |
+| Gold layer | dbt + Databricks — Last Mile metrics and models |
+| Visualization | Power BI — connected to Databricks Gold layer |
 | Version control | Git · GitHub |
+
+---
+
+## Architecture
+
+```
+CSV Olist (Kaggle)
+      ↓
+Bronze (Databricks) — raw data
+      ↓
+Silver (Databricks) — cleaned, standardized
+      ↓
+Gold (dbt + Databricks) — Last Mile metrics
+      ↓
+Power BI — visualization and consumption
+```
 
 ---
 
@@ -40,12 +59,12 @@ Which phase of the order lifecycle concentrates more delay: between approval and
 
 | Phase | Focus | Key deliverable | Status |
 |---|---|---|---|
-| 1 | Ingestion & exploration | Load all 9 tables, map relationships and inconsistencies | ✅ In progress |
-| 2 | Cleaning & BigQuery | Treat inconsistent dates, load raw data to warehouse | ⏳ Pending |
-| 3 | Exploratory analysis | SQL queries answering Q1–Q4 | ⏳ Pending |
-| 4 | Visualization | Power BI dashboard connected to BigQuery | ⏳ Pending |
+| 1 | Local exploration | Read all 9 tables with pandas, map relationships and inconsistencies | ✅ Done |
+| 2 | Bronze layer | Load raw CSVs into Databricks Bronze — no transformation | ⏳ Pending |
+| 3 | Exploratory analysis | SQL queries answering Q1–Q4 inside Databricks | ⏳ Pending |
+| 4 | Visualization | Power BI dashboard connected to Databricks | ⏳ Pending |
 | 5 | ETL pipeline | Automated incremental ingestion pipeline | ⏳ Pending |
-| 6 | dbt modeling | Staging, intermediate and mart layers with tests and documentation | ⏳ Pending |
+| 6 | dbt modeling | Silver and Gold layers with tests and documentation | ⏳ Pending |
 
 ---
 
@@ -76,18 +95,16 @@ olist-last-mile/
 │   └── raw/              # Original Kaggle CSVs — never modified
 │
 ├── notebooks/
-│   ├── 01_ingestion.ipynb
-│   ├── 02_cleaning.ipynb
-│   └── 03_exploratory.ipynb
+│   ├── 01_exploration.ipynb
+│   └── 02_exploratory_analysis.ipynb
 │
 ├── sql/
-│   └── exploratory/      # BigQuery queries — one file per business question
+│   └── exploratory/      # Databricks SQL queries — one file per business question
 │
 ├── dbt/
 │   ├── models/
-│   │   ├── staging/
-│   │   ├── intermediate/
-│   │   └── mart/
+│   │   ├── silver/
+│   │   └── gold/
 │   ├── tests/
 │   └── dbt_project.yml
 │
