@@ -1,6 +1,6 @@
 # Olist Last Mile Analysis
 
-Analysis of last mile delivery performance using the Brazilian e-commerce public dataset (Olist), covering order fulfillment, delivery delays, freight pricing, and customer satisfaction.
+Analysis of last-mile delivery performance using the Brazilian e-commerce public dataset (Olist), covering order fulfilment, delivery delays, freight pricing, and customer satisfaction.
 
 ---
 
@@ -8,19 +8,19 @@ Analysis of last mile delivery performance using the Brazilian e-commerce public
 
 This project is structured around four core questions:
 
-**Q1 — Customer tolerance and satisfaction impact**
-What is the relationship between delivery delay (in days) and customer review scores? Is there a threshold from which satisfaction drops significantly?
+**Q1 — Customer tolerance and satisfaction impact:**
+- What is the relationship between delivery delay (in days) and customer review scores? Is there a threshold from which satisfaction drops significantly?
 
-**Q2 — Cross-region deliveries and delivery performance**
-Do orders crossing state or municipal boundaries show higher delivery delays compared to local deliveries?
-> Note: this analysis measures total delivery delay, not last mile in isolation.
+**Q2 — Cross-region deliveries and delivery performance:**
+- Do orders crossing state or municipal boundaries show higher delivery delays compared to local deliveries?
+>Note: this analysis measures total delivery delay, not last mile in isolation.
 
-**Q3 — Freight cost and distance correlation**
-Is freight value correlated with the estimated distance between seller and customer zip codes?
-> Note: distance is calculated as straight-line (Euclidean) between coordinates — used as a proxy for road distance.
+**Q3 — Freight cost and distance correlation:**
+- Is freight value correlated with the estimated distance between seller and customer ZIP codes?
+>Note: distance is calculated as straight-line (Euclidean) between coordinates — used as a proxy for road distance.
 
 **Q4 — Where does delay concentrate?**
-Which phase of the order lifecycle concentrates more delay: between approval and shipment (seller responsibility) or between shipment and delivery (carrier responsibility)?
+- Which phase of the order lifecycle concentrates more delay: between approval and shipment (seller responsibility) or between shipment and delivery (carrier responsibility)?
 
 ---
 
