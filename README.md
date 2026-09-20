@@ -1,5 +1,3 @@
-
-
 # Olist Last Mile Analysis
 
 Analysis of last mile delivery performance using the Brazilian e-commerce public dataset (Olist), covering order fulfillment, delivery delays, freight pricing, and customer satisfaction.
@@ -60,11 +58,11 @@ Power BI — visualization and consumption
 | Phase | Focus | Key deliverable | Status |
 |---|---|---|---|
 | 1 | Local exploration | Read all 9 tables with pandas, map relationships and inconsistencies | ✅ Done |
-| 2 | Bronze layer | Load raw CSVs into Databricks Bronze — no transformation | ⏳ Pending |
+| 2 | Bronze layer | Load raw CSVs into Databricks Bronze — no transformation | ✅ Done |
 | 3 | Exploratory analysis | SQL queries answering Q1–Q4 inside Databricks | ⏳ Pending |
-| 4 | Visualization | Power BI dashboard connected to Databricks | ⏳ Pending |
-| 5 | ETL pipeline | Automated incremental ingestion pipeline | ⏳ Pending |
-| 6 | dbt modeling | Silver and Gold layers with tests and documentation | ⏳ Pending |
+| 4 | ETL pipeline | Automated incremental ingestion pipeline | ⏳ Pending |
+| 5 | dbt modeling | Silver and Gold layers with tests and documentation | ⏳ Pending |
+| 6 | Visualization | Power BI dashboard connected to Databricks Gold layer | ⏳ Pending |
 
 ---
 
@@ -88,15 +86,11 @@ Power BI — visualization and consumption
 ## Project Structure
 
 ```
-olist-last-mile/
+olist-last-mile-analysis/
 │
 ├── README.md
-├── data/
-│   └── raw/              # Original Kaggle CSVs — never modified
-│
 ├── notebooks/
-│   ├── 01_exploration.ipynb
-│   └── 02_exploratory_analysis.ipynb
+│   └── phase-1-exploration.ipynb
 │
 ├── sql/
 │   └── exploratory/      # Databricks SQL queries — one file per business question
