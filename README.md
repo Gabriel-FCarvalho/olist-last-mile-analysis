@@ -8,16 +8,16 @@ Analysis of last-mile delivery performance using the Brazilian e-commerce public
 
 This project is structured around four core questions:
 
-**Q1 — Customer tolerance and satisfaction impact:**
+**Q1 — Delay and customer satisfaction:**
 - What is the relationship between delivery delay (in days) and customer review scores? Is there a threshold from which satisfaction drops significantly?
 
 **Q2 — Cross-region deliveries and delivery performance:**
 - Do orders crossing state or municipal boundaries show higher delivery delays compared to local deliveries?
->Note: this analysis measures total delivery delay, not last mile in isolation.
+> Note: this analysis measures total delivery delay, not last mile in isolation.
 
 **Q3 — Freight cost and distance correlation:**
 - Is freight value correlated with the estimated distance between seller and customer ZIP codes?
->Note: distance is calculated as straight-line (Euclidean) between coordinates — used as a proxy for road distance.
+> Note: distance is calculated as straight-line (Euclidean) between coordinates — used as a proxy for road distance.
 
 **Q4 — Where does delay concentrate?**
 - Which phase of the order lifecycle concentrates more delay: between approval and shipment (seller responsibility) or between shipment and delivery (carrier responsibility)?
@@ -28,10 +28,9 @@ This project is structured around four core questions:
 
 | Layer | Tool |
 |---|---|
-| Notebooks & exploration | Databricks Notebooks |
-| Bronze layer | Databricks — raw data, never modified |
-| Silver layer | Databricks — cleaned and standardized data |
-| Gold layer | dbt + Databricks — Last Mile metrics and models |
+| Bronze | Databricks — raw data, never modified |
+| Silver | Databricks — cleaned and standardized data |
+| Gold | dbt + Databricks — Last Mile metrics and models |
 | Visualization | Power BI — connected to Databricks Gold layer |
 | Version control | Git · GitHub |
 
@@ -57,12 +56,12 @@ Power BI — visualization and consumption
 
 | Phase | Focus | Key deliverable | Status |
 |---|---|---|---|
-| 1 | Local exploration | Read all 9 tables with pandas, map relationships and inconsistencies | ✅ Done |
-| 2 | Bronze layer | Load raw CSVs into Databricks Bronze — no transformation | ✅ Done |
-| 3 | Exploratory analysis | SQL queries answering Q1–Q4 inside Databricks | ⏳ Pending |
-| 4 | ETL pipeline | Automated incremental ingestion pipeline | ⏳ Pending |
-| 5 | dbt modeling | Silver and Gold layers with tests and documentation | ⏳ Pending |
+| 1 & 2 | Data import | Workspace setup, CSVs loaded into Databricks, Bronze ready | ✅ Done |
+| 3 | Silver layer | Cleaned and standardized data — ready for analysis | ⏳ Pending |
+| 4 | Business analysis | SQL + Statistics answering Q1–Q4 over Silver | ⏳ Pending |
+| 5 | Gold layer | dbt modeling + ETL pipeline + Last Mile metrics | ⏳ Pending |
 | 6 | Visualization | Power BI dashboard connected to Databricks Gold layer | ⏳ Pending |
+| 7 | Storytelling | Case narrative + portfolio + README final | ⏳ Pending |
 
 ---
 
@@ -90,15 +89,16 @@ olist-last-mile-analysis/
 │
 ├── README.md
 ├── notebooks/
-│   └── phase-1-exploration.ipynb
+│   └── phase-1-exploration.ipynb       # Historical reference — local exploration
+│
+├── silver/                              # Databricks — cleaning and standardization
 │
 ├── sql/
-│   └── exploratory/      # Databricks SQL queries — one file per business question
+│   └── business_questions/             # Databricks SQL — Q1–Q4 over Silver
 │
 ├── dbt/
 │   ├── models/
-│   │   ├── silver/
-│   │   └── gold/
+│   │   └── gold/                       # dbt models — Last Mile metrics
 │   ├── tests/
 │   └── dbt_project.yml
 │
@@ -108,7 +108,3 @@ olist-last-mile-analysis/
 └── docs/
     └── data_model.md
 ```
-
----
-
-*Project developed as part of a data career transition — from fiscal analyst to data analyst with analytics engineering focus.*
