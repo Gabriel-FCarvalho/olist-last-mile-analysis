@@ -6,21 +6,17 @@ Analysis of last-mile delivery performance using the Brazilian e-commerce public
 
 ## Business Questions
 
-This project is structured around four core questions:
+This project is structured around three core questions:
 
-**Q1 — Delay and customer satisfaction:**
+**Q1 — Where does delay occur in the delivery cycle?**
+- Which phase of the order lifecycle concentrates more delay: between approval and shipment (seller responsibility) or between shipment and delivery (carrier responsibility)?
+
+**Q2 — Delay and customer satisfaction:**
 - What is the relationship between delivery delay (in days) and customer review scores? Is there a threshold from which satisfaction drops significantly?
 
-**Q2 — Cross-region deliveries and delivery performance:**
-- Do orders crossing state or municipal boundaries show higher delivery delays compared to local deliveries?
-> Note: this analysis measures total delivery delay, not last mile in isolation.
-
-**Q3 — Freight cost and distance correlation:**
-- Is freight value correlated with the estimated distance between seller and customer ZIP codes?
+**Q3 — Regions and routes with worst delivery performance:**
+- Which regions and routes concentrate the highest delays? Do orders crossing state boundaries show higher delays compared to local deliveries?
 > Note: distance is calculated as straight-line (Euclidean) between coordinates — used as a proxy for road distance.
-
-**Q4 — Where does delay concentrate?**
-- Which phase of the order lifecycle concentrates more delay: between approval and shipment (seller responsibility) or between shipment and delivery (carrier responsibility)?
 
 ---
 
@@ -57,8 +53,8 @@ Power BI — visualization and consumption
 | Phase | Focus | Key deliverable | Status |
 |---|---|---|---|
 | 1 & 2 | Data import | Workspace setup, CSVs loaded into Databricks, Bronze ready | ✅ Done |
-| 3 | Silver layer | Cleaned and standardized data — ready for analysis | ⏳ Pending |
-| 4 | Business analysis | SQL + Statistics answering Q1–Q4 over Silver | ⏳ Pending |
+| 3 | Silver layer | Cleaned and standardized data — ready for analysis | ✅ Done |
+| 4 | Business analysis | SQL + Statistics answering Q1–Q3 over Silver | ⏳ Pending |
 | 5 | Gold layer | dbt modeling + ETL pipeline + Last Mile metrics | ⏳ Pending |
 | 6 | Visualization | Power BI dashboard connected to Databricks Gold layer | ⏳ Pending |
 | 7 | Storytelling | Case narrative + portfolio + README final | ⏳ Pending |
@@ -88,13 +84,16 @@ Power BI — visualization and consumption
 olist-last-mile-analysis/
 │
 ├── README.md
-├── notebooks/
-│   └── phase-1-exploration.ipynb       # Historical reference — local exploration
+├── bronze/                              # Databricks — raw Delta tables
+│   ├── 01_create_bronze_tables
+│   └── DECISIONS.md
 │
 ├── silver/                              # Databricks — cleaning and standardization
+│   ├── 01_create_silver_tables
+│   └── DECISIONS.md
 │
 ├── sql/
-│   └── business_questions/             # Databricks SQL — Q1–Q4 over Silver
+│   └── business_questions/             # Databricks SQL — Q1–Q3 over Silver
 │
 ├── dbt/
 │   ├── models/
